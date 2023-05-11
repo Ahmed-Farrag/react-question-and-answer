@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { question } from "../data";
 
-const FormInput = ({ onAdd }) => {
+const FormInput = ({ onAdd, notify }) => {
   const [qu, setQu] = useState("");
   const [an, setAn] = useState("");
   const addNewItem = () => {
+    if (qu === "" || an === "") {
+      notify("من فضلك اكمل البيانات", "Error");
+      return;
+    }
     question.push({ id: Math.random(), q: qu, a: an });
     setQu("");
     setAn("");
