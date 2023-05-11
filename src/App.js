@@ -10,6 +10,15 @@ function App() {
   const addItem = () => {
     setData([...question]);
   };
+
+  const daleteAllItems = () => {
+    question.slice(0, question.length);
+    setData([]);
+  };
+  
+  const deleteOneItem = (items) => {
+    setData([...items]);
+  };
   return (
     <div className="font text-center color-body">
       <Container className="p-5">
@@ -19,9 +28,11 @@ function App() {
           </Col>
           <Col sm="8">
             <FormInput onAdd={addItem} />
-            <QAList data={data} />
+            <QAList data={data} deleteOneItem={deleteOneItem} />
             {data.length >= 1 ? (
-              <Button className="w-100 my-3">مسح الكل</Button>
+              <Button onClick={daleteAllItems} className="w-100 my-3">
+                مسح الكل
+              </Button>
             ) : null}
           </Col>
         </Row>

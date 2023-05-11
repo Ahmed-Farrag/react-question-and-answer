@@ -1,7 +1,15 @@
 import React from "react";
 import { Accordion, Button, Row } from "react-bootstrap";
+import { question } from "../data";
 
-const QAList = ({ data }) => {
+const QAList = ({ data, deleteOneItem }) => {
+  const onDeleteItem = (ID) => {
+    if (data.length >= 1) {
+      const index = question.findIndex((item) => item.id === ID);
+      question.splice(index, 1);
+      deleteOneItem(question);
+    }
+  };
   return (
     <Row>
       <Accordion>
@@ -12,7 +20,9 @@ const QAList = ({ data }) => {
                 <Accordion.Header> {item.q}</Accordion.Header>
                 <Accordion.Body className="text-end">
                   <div className="px-3 d-inline ">{item.a}</div>
-                  <Button>مسح السؤال</Button>
+                  <Button onClick={() => onDeleteItem(item.id)}>
+                    مسح السؤال
+                  </Button>
                 </Accordion.Body>
               </Accordion.Item>
             );
