@@ -8,16 +8,22 @@ import { question } from "./data.js";
 function App() {
   const [data, setData] = useState(question);
   const addItem = () => {
+    localStorage.setItem("items", JSON.stringify([...question]));
     setData([...question]);
   };
 
   const daleteAllItems = () => {
+    localStorage.romoveItem("items");
     question.slice(0, question.length);
     setData([]);
   };
-  
+
   const deleteOneItem = (items) => {
+    localStorage.setItem("items", JSON.stringify([...items]));
     setData([...items]);
+    if (items.length <= 0) {
+      daleteAllItems();
+    }
   };
   return (
     <div className="font text-center color-body">

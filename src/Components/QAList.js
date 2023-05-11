@@ -3,8 +3,10 @@ import { Accordion, Button, Row } from "react-bootstrap";
 import { question } from "../data";
 
 const QAList = ({ data, deleteOneItem }) => {
+  const dataLocal = JSON.parse(localStorage.getItem("items"));
+
   const onDeleteItem = (ID) => {
-    if (data.length >= 1) {
+    if (localStorage.getItem("items") != null) {
       const index = question.findIndex((item) => item.id === ID);
       question.splice(index, 1);
       deleteOneItem(question);
@@ -13,8 +15,8 @@ const QAList = ({ data, deleteOneItem }) => {
   return (
     <Row>
       <Accordion>
-        {data.length >= 1 ? (
-          data.map((item, index) => {
+        {localStorage.getItem("items") != null ? (
+          dataLocal.map((item, index) => {
             return (
               <Accordion.Item key={index} eventKey={item.id}>
                 <Accordion.Header> {item.q}</Accordion.Header>
